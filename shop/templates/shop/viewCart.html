@@ -1,0 +1,26 @@
+{% extends 'shop/base.html' %}
+{% block content %}
+	<table class="table table-striped">
+		<thead>
+		  <tr>
+		    <th>Product</th>
+		    <th>Image</th>
+		    <th>Price</th>
+		    <th>Quantity</th>
+		    <th>Delete</th>
+		  </tr>
+		</thead>
+		<tbody>
+		{% for item in cart.values %}
+		  <tr>
+		    <td>{{item.title}}</td>
+		    <td><img src="/media/{{item.image}}" width="10%"></td>
+		    <td>${{item.price}}</td>
+		    <td><input type="number" min="1" id="quantity_{{item.id}}" onclick="updateCart({{item.id}})" value="{{item.quantity}}"></td>
+		    <th><a href="{% url 'shop:deleteCart' item.id %}" title="">Delete</a></th>
+		  </tr>
+		{% endfor %}
+		</tbody>
+	</table>
+	<h3 class="font-weight-bold">Total: ${{total}}</h3>
+{% endblock %}
